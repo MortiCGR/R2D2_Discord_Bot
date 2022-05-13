@@ -33,6 +33,7 @@ dotenv_1.default.config();
 const client = new discord_js_1.default.Client({
     intents: [
         discord_js_1.Intents.FLAGS.GUILDS,
+        discord_js_1.Intents.FLAGS.GUILD_MEMBERS,
         discord_js_1.Intents.FLAGS.GUILD_MESSAGES
     ]
 });
