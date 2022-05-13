@@ -1,5 +1,7 @@
 import DiscordJS, { Intents } from 'discord.js'
 import dotenv from 'dotenv'
+import welcomeMessage from './welcomeMessage'
+ 
 dotenv.config()
 
 const client = new DiscordJS.Client({
@@ -11,6 +13,7 @@ const client = new DiscordJS.Client({
 
 client.on('ready', () => {
     console.log('The bot is ready')
+    welcomeMessage(client)
 })
 
 client.on('messageCreate', (message) => {
@@ -20,7 +23,6 @@ client.on('messageCreate', (message) => {
             allowedMentions: { repliedUser: false }
         })
     }
-
 })
 
 client.login(process.env.TOKEN)

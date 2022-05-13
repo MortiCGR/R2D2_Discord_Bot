@@ -28,6 +28,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const discord_js_1 = __importStar(require("discord.js"));
 const dotenv_1 = __importDefault(require("dotenv"));
+const welcomeMessage_1 = __importDefault(require("./welcomeMessage"));
 dotenv_1.default.config();
 const client = new discord_js_1.default.Client({
     intents: [
@@ -37,6 +38,7 @@ const client = new discord_js_1.default.Client({
 });
 client.on('ready', () => {
     console.log('The bot is ready');
+    (0, welcomeMessage_1.default)(client);
 });
 client.on('messageCreate', (message) => {
     if (message.content === 'ping') {
