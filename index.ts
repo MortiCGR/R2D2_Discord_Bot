@@ -1,7 +1,6 @@
 import DiscordJS, { Intents } from 'discord.js'
 import dotenv from 'dotenv'
 import welcomeMessage from './welcomeMessage'
- 
 dotenv.config()
 
 const client = new DiscordJS.Client({
