@@ -40,34 +40,8 @@ const client = new discord_js_1.default.Client({
     ]
 });
 client.on('ready', () => {
-    var _a;
     console.log('The bot is ready');
     (0, welcomeMessage_1.default)(client);
-    const guildId = '963913950041370676'; // Test
-    const guild = client.guilds.cache.get(guildId);
-    let commands;
-    if (guild) {
-        guild.commands;
-    }
-    else {
-        commands = (_a = client.application) === null || _a === void 0 ? void 0 : _a.commands;
-    }
-    commands === null || commands === void 0 ? void 0 : commands.create({
-        name: 'ping',
-        description: 'Replies with pong',
-    });
-    commands === null || commands === void 0 ? void 0 : commands.create({
-        name: 'pace',
-        description: 'Calculated how many waves you will have at the end of this season',
-        options: [
-            {
-                name: 'currentWaves',
-                description: 'Your current seasonal waves',
-                required: true,
-                type: discord_js_1.default.Constants.ApplicationCommandOptionTypes.INTEGER
-            }
-        ]
-    });
     (0, CommandHandler_1.default)(client);
 });
 client.on('messageCreate', (message) => {
