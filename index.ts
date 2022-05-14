@@ -31,6 +31,11 @@ client.on('ready', () => {
     }
 
     commands?.create({
+        name: 'ping',
+        description: 'Replies with pong',
+    })
+
+    commands?.create({
         name: 'pace',
         description: 'Calculated how many waves you will have at the end of this season',
         options: [

@@ -54,6 +54,10 @@ client.on('ready', () => {
         commands = (_a = client.application) === null || _a === void 0 ? void 0 : _a.commands;
     }
     commands === null || commands === void 0 ? void 0 : commands.create({
+        name: 'ping',
+        description: 'Replies with pong',
+    });
+    commands === null || commands === void 0 ? void 0 : commands.create({
         name: 'pace',
         description: 'Calculated how many waves you will have at the end of this season',
         options: [
