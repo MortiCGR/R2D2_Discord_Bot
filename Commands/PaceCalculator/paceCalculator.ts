@@ -3,7 +3,7 @@ export default (waves: string) => {
     let wavesNumber = parseInt(waves)
     
     // offset date in UTC
-    let dt = new Date("2021-05-30T16:00:00Z");
+    let dt = new Date("2021-05-30T15:00:00Z");
     let dOffset = dt.getTime();
     let d = new Date(); 
     // pass current date to UTC

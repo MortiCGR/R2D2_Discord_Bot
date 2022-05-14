@@ -1,7 +1,7 @@
 export default () => {
     
     // offset date in UTC
-    let dt = new Date("2022-04-10T16:00:00Z");
+    let dt = new Date("2022-04-10T15:00:00Z");
     let dOffset = dt.getTime();
     let d = new Date(); 
     // pass current date to UTC
