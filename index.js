@@ -34,7 +34,8 @@ const client = new discord_js_1.default.Client({
     intents: [
         discord_js_1.Intents.FLAGS.GUILDS,
         discord_js_1.Intents.FLAGS.GUILD_MEMBERS,
-        discord_js_1.Intents.FLAGS.GUILD_MESSAGES
+        discord_js_1.Intents.FLAGS.GUILD_MESSAGES,
+        discord_js_1.Intents.FLAGS.GUILD_MESSAGE_REACTIONS
     ]
 });
 client.on('ready', () => {
