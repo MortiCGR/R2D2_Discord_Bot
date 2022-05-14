@@ -1,6 +1,7 @@
 import DiscordJS, { Intents } from 'discord.js'
 import dotenv from 'dotenv'
-import welcomeMessage from './welcomeMessage'
+import CommandHandler from './Commands/CommandHandler'
+import welcomeMessage from './Commands/WelcomeMessage/welcomeMessage'
 dotenv.config()
 
 const client = new DiscordJS.Client({
@@ -14,7 +15,34 @@ const client = new DiscordJS.Client({
 
 client.on('ready', () => {
     console.log('The bot is ready')
+    const guildId = '963913950041370676'; // Test
+    const guild = client.guilds.cache.get(guildId)
     welcomeMessage(client)
+    CommandHandler(client)
+
+    let commands
+
+    if (guild)
+    {
+        guild.commands
+    }
+    else {
+        commands = client.application?.commands
+    }
+
+    commands?.create({
+        name: 'pace',
+        description: 'Calculated how many waves you will have at the end of this season',
+        options: [
+            {
+                name: 'currentWaves',
+                description: 'Your current seasonal waves',
+                required: true,
+                type: DiscordJS.Constants.ApplicationCommandOptionTypes.INTEGER
+            }
+        ]
+    })
+
 })
 
 client.on('messageCreate', (message) => {

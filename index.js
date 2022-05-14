@@ -28,7 +28,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const discord_js_1 = __importStar(require("discord.js"));
 const dotenv_1 = __importDefault(require("dotenv"));
-const welcomeMessage_1 = __importDefault(require("./welcomeMessage"));
+const CommandHandler_1 = __importDefault(require("./Commands/CommandHandler"));
+const welcomeMessage_1 = __importDefault(require("./Commands/WelcomeMessage/welcomeMessage"));
 dotenv_1.default.config();
 const client = new discord_js_1.default.Client({
     intents: [
@@ -39,8 +40,31 @@ const client = new discord_js_1.default.Client({
     ]
 });
 client.on('ready', () => {
+    var _a;
     console.log('The bot is ready');
+    const guildId = '963913950041370676'; // Test
+    const guild = client.guilds.cache.get(guildId);
     (0, welcomeMessage_1.default)(client);
+    (0, CommandHandler_1.default)(client);
+    let commands;
+    if (guild) {
+        guild.commands;
+    }
+    else {
+        commands = (_a = client.application) === null || _a === void 0 ? void 0 : _a.commands;
+    }
+    commands === null || commands === void 0 ? void 0 : commands.create({
+        name: 'pace',
+        description: 'Calculated how many waves you will have at the end of this season',
+        options: [
+            {
+                name: 'currentWaves',
+                description: 'Your current seasonal waves',
+                required: true,
+                type: discord_js_1.default.Constants.ApplicationCommandOptionTypes.INTEGER
+            }
+        ]
+    });
 });
 client.on('messageCreate', (message) => {
     if (message.content === 'ping') {
