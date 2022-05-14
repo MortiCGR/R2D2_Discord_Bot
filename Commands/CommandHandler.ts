@@ -1,5 +1,6 @@
 import { Client } from "discord.js"
 import paceCalculator from "./PaceCalculator/paceCalculator"
+import resetCalculator from "./ResetCalculator/resetCalculator"
 
 export default (client : Client) => {
     client.on('messageCreate', (message) => {
@@ -12,11 +13,21 @@ export default (client : Client) => {
 
         const commandName = messageStringList[0].substring(1);
 
+        let content
+
         switch (commandName) {
             case 'pace':
-                let content = messageStringList.length == 2 ? paceCalculator(messageStringList[1]) : 'Needs only one parameter for this command'
+                content = messageStringList.length == 2 ? paceCalculator(messageStringList[1]) : 'Needs only one parameter for this command'
                 message.reply({
                     content: content,
+                    allowedMentions: { repliedUser: false }
+                })
+                
+                break;
+
+            case 'reset':
+                message.reply({
+                    content: resetCalculator(),
                     allowedMentions: { repliedUser: false }
                 })
                 
