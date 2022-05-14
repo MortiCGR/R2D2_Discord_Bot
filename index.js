@@ -42,10 +42,9 @@ const client = new discord_js_1.default.Client({
 client.on('ready', () => {
     var _a;
     console.log('The bot is ready');
+    (0, welcomeMessage_1.default)(client);
     const guildId = '963913950041370676'; // Test
     const guild = client.guilds.cache.get(guildId);
-    (0, welcomeMessage_1.default)(client);
-    (0, CommandHandler_1.default)(client);
     let commands;
     if (guild) {
         guild.commands;
@@ -69,6 +68,7 @@ client.on('ready', () => {
             }
         ]
     });
+    (0, CommandHandler_1.default)(client);
 });
 client.on('messageCreate', (message) => {
     if (message.content === 'ping') {

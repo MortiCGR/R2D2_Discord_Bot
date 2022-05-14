@@ -15,13 +15,13 @@ const client = new DiscordJS.Client({
 
 client.on('ready', () => {
     console.log('The bot is ready')
-    const guildId = '963913950041370676'; // Test
-    const guild = client.guilds.cache.get(guildId)
     welcomeMessage(client)
-    CommandHandler(client)
-
+    
+    const guildId = '963913950041370676' // Test
+    const guild = client.guilds.cache.get(guildId)
+    
     let commands
-
+    
     if (guild)
     {
         guild.commands
@@ -29,12 +29,12 @@ client.on('ready', () => {
     else {
         commands = client.application?.commands
     }
-
+    
     commands?.create({
         name: 'ping',
         description: 'Replies with pong',
     })
-
+    
     commands?.create({
         name: 'pace',
         description: 'Calculated how many waves you will have at the end of this season',
@@ -47,7 +47,8 @@ client.on('ready', () => {
             }
         ]
     })
-
+    
+    CommandHandler(client)
 })
 
 client.on('messageCreate', (message) => {
