@@ -20,13 +20,4 @@ client.on('ready', () => {
     CommandHandler(client)
 })
 
-client.on('messageCreate', (message) => {
-    if (message.content === 'ping') {
-        message.reply({
-            content: 'pong',
-            allowedMentions: { repliedUser: false }
-        })
-    }
-})
-
 client.login(process.env.TOKEN)
