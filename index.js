@@ -44,12 +44,4 @@ client.on('ready', () => {
     (0, welcomeMessage_1.default)(client);
     (0, CommandHandler_1.default)(client);
 });
-client.on('messageCreate', (message) => {
-    if (message.content === 'ping') {
-        message.reply({
-            content: 'pong',
-            allowedMentions: { repliedUser: false }
-        });
-    }
-});
 client.login(process.env.TOKEN);

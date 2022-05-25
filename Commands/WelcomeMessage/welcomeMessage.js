@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (client) => {
-    const testhannelId = `963913950620176386`; // test welcome channel
+    const testChannelId = `963913950620176386`; // test welcome channel
     const serverChannelId = `720272056259838052`; // RB welcome channel
     client.on('guildMemberAdd', (member) => {
         let message = `Hi! <@${member.id}> Welcome to RedBridge! Just a quick summary of our guilds :\n\n`;
@@ -18,7 +18,7 @@ exports.default = (client) => {
         message += `Waves :\n`;
         message += `Estimated Waves/Season (5 day period) :\n`;
         message += `Thank you!\n`;
-        let channelId = member.guild.id == "963913950041370676" ? testhannelId : serverChannelId;
+        let channelId = member.guild.id == "963913950041370676" ? testChannelId : serverChannelId;
         const channel = member.guild.channels.cache.get(channelId);
         if (channel !== undefined && channel.isText()) {
             channel.send(message);

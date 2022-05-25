@@ -1,7 +1,7 @@
 import { Client } from "discord.js"
 
 export default (client : Client) => {
-    const testhannelId = `963913950620176386`; // test welcome channel
+    const testChannelId = `963913950620176386`; // test welcome channel
     const serverChannelId = `720272056259838052`; // RB welcome channel
 
     client.on('guildMemberAdd', (member) => {
@@ -20,7 +20,7 @@ export default (client : Client) => {
         message += `Estimated Waves/Season (5 day period) :\n`
         message += `Thank you!\n`
 
-        let channelId = member.guild.id == "963913950041370676" ? testhannelId : serverChannelId
+        let channelId = member.guild.id == "963913950041370676" ? testChannelId : serverChannelId
 
         const channel = member.guild.channels.cache.get(channelId)
         
