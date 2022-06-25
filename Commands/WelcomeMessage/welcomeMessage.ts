@@ -5,6 +5,12 @@ export default (client : Client) => {
     const serverChannelId = `720272056259838052`; // RB welcome channel
 
     client.on('guildMemberAdd', (member) => {
+        // to safely test commands in test server
+        // if (message.guildId != "963913950041370676")
+        // {
+        //     return
+        // }
+        
         let message = `Hi! <@${member.id}> Welcome to RedBridge! Just a quick summary of our guilds :\n\n`
         message += `${member.guild.emojis.cache.find(emoji => emoji.name === 'RB1')} Redbridge - 30k waves per season - 50k minimum career waves\n`
         message += `${member.guild.emojis.cache.find(emoji => emoji.name === 'RB2')} Redbridge 2 - 20k waves per season - 10k minimum career waves\n`

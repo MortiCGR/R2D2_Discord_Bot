@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const CostFormatter_1 = __importDefault(require("./CostFormatter"));
 exports.default = (initial, final) => {
     let initialNumber = parseInt(initial);
+    initialNumber = initialNumber === 0 ? 1 : initialNumber;
     let finalNumber = parseInt(final);
     let cost = 0;
     if (finalNumber <= initialNumber) {

@@ -6,6 +6,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const CostFormatter_1 = __importDefault(require("./CostFormatter"));
 exports.default = (initial, final, multiplier) => {
     let initialNumber = parseInt(initial);
+    initialNumber = initialNumber === 0 ? 1 : initialNumber;
     let finalNumber = parseInt(final);
-    return (0, CostFormatter_1.default)(new Intl.NumberFormat('en-US').format((initialNumber + finalNumber) * (finalNumber - initialNumber) / 2 * multiplier).toString());
+    let cost = 0;
+    if (finalNumber <= initialNumber) {
+        return cost.toString();
+    }
+    cost = (initialNumber + finalNumber) * (finalNumber - initialNumber) / 2 * multiplier;
+    return (0, CostFormatter_1.default)(new Intl.NumberFormat('en-US').format(cost).toString());
 };

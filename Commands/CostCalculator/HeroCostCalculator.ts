@@ -2,7 +2,8 @@ import CostFormatter from "./CostFormatter"
 
 export default (initial: string, final: string) => {
 
-    let initialNumber = parseInt(initial)
+    let initialNumber = parseInt(initial);
+    initialNumber = initialNumber === 0 ? 1 : initialNumber;
     let finalNumber = parseInt(final)
 
     let cost = 0

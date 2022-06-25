@@ -6,40 +6,42 @@ import resetCalculator from "./ResetCalculator/resetCalculator"
 
 export default (client : Client) => {
     client.on('messageCreate', (message) => {
+        // to safely test commands in test server
+        // if (message.guildId != "963913950041370676")
+        // {
+        //     return
+        // }
+        
         // make sure it's a command OR it's not send from welcome channel
         if ((!message.content.startsWith('!') && !message.content.startsWith('^')) || message.channelId === '720272056259838052') {
             return
         }
 
+        const username = message.author.username;
         const messageStringList = message.content.split(' ');
-
         const commandName = messageStringList[0].substring(1).toLowerCase();
 
         let content
 
         switch (commandName) {
             case 'help':
-                const embed = new MessageEmbed() 
+                let embed = new MessageEmbed() 
                 .setTitle("Help Command")
                 .setColor(0x00AE86)
-                .setDescription("Type ^help for this command")
+                .setDescription("Type ^ or ! as a prefix for a command")
                 .addField("^reset",
-                "will bring up reset timers for Guild Season, Season Colonies and Hell Mode.")
-                .addField("^pace", "followed by any number will bring up an estimate for your waves for the rest of that guild season, based on the number that you put in and hours elapsed in the season so far.", true)
-                .addField("^ratio", "followed by your wave and the ratio you want to have, such as 200000 and 0.4 will pull up the TA/Castle value you should have for that wave/ratio.")
-                .addField("^hero", `followed by a starting and ending level will give you the gold difference for levelling from start to end. "^hero 10 1000" for example`)
-                .addField("^castle",`followed by a starting and ending level will give you the gold difference for levelling from start to end. "^Castle 10000 100001" for example`)
-                .addField("^ta", `followed by a starting and ending level will give you the gold difference for levelling from start to end. "^TA 10000 100001" for example`);
+                "returns reset timers for Guild Season, Season Colonies and Hell Mode.")
+                .addField("^pace [seasonal waves] [OPTIONAL target pace]", "returns an estimate for your waves for the rest of that guild season, based on the number that you put in and hours elapsed in the season so far. Optionally it returns how many waves you should have done to reach your target pace")
+                .addField("^ratio [career wave] [ratio]", "returns the level of the unit you should have based on your wave and your desired ratio.")
+                .addField("^hero [initial level] [final level]", `returns the gold difference for levelling from start to end. "^hero 10 1000" for example`)
+                .addField("^castle [initial level] [final level]",`returns the gold difference for levelling from start to end. "^Castle 10000 100001" for example`)
+                .addField("^ta [initial level] [final level]", `returns the gold difference for levelling from start to end. "^TA 10000 100001" for example`);
     
                 message.channel.send({ embeds: [embed]});
                 
                 break;
             case 'pace':
-                content = messageStringList.length == 2 ? paceCalculator(messageStringList[1]) : 'Needs one parameter for this command'
-                message.reply({
-                    content: content,
-                    allowedMentions: { repliedUser: false }
-                })
+                message.channel.send({ embeds: [paceCalculator(username, messageStringList)]});
                 
                 break;
             case 'ratio':
