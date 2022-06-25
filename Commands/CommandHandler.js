@@ -15,11 +15,12 @@ exports.default = (client) => {
         // {
         //     return
         // }
+        var _a;
         // make sure it's a command OR it's not send from welcome channel
         if ((!message.content.startsWith('!') && !message.content.startsWith('^')) || message.channelId === '720272056259838052') {
             return;
         }
-        const username = message.author.username;
+        const username = (_a = message.member) === null || _a === void 0 ? void 0 : _a.displayName;
         const messageStringList = message.content.split(' ');
         const commandName = messageStringList[0].substring(1).toLowerCase();
         let content;

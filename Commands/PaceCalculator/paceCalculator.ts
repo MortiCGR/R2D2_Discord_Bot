@@ -1,7 +1,7 @@
 import { MessageEmbed } from "discord.js";
 import ConvertMsToTime from "../Utils/ConvertMsToTime";
 
-export default (username : string, parameters: string[]) => {
+export default (username : string|undefined, parameters: string[]) => {
     const embed = new MessageEmbed()
     .setTitle("Pace")
     .setColor(0xCC0000) // red for errors

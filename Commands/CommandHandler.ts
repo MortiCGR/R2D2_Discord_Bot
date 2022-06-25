@@ -17,7 +17,7 @@ export default (client : Client) => {
             return
         }
 
-        const username = message.author.username;
+        const username = message.member?.displayName;
         const messageStringList = message.content.split(' ');
         const commandName = messageStringList[0].substring(1).toLowerCase();
 
