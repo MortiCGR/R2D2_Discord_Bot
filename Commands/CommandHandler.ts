@@ -3,6 +3,7 @@ import CostCalculator from "./CostCalculator/CostCalculator"
 import HeroCostCalculator from "./CostCalculator/HeroCostCalculator"
 import paceCalculator from "./PaceCalculator/paceCalculator"
 import resetCalculator from "./ResetCalculator/resetCalculator"
+import UpgradesCalculator from "./UpgradesCalculator/UpgradesCalculator"
 
 export default (client : Client) => {
     client.on('messageCreate', (message) => {
@@ -33,9 +34,10 @@ export default (client : Client) => {
                 "returns reset timers for Guild Season, Season Colonies and Hell Mode.")
                 .addField("^pace [seasonal waves] [OPTIONAL target pace]", "returns an estimate for your waves for the rest of that guild season, based on the number that you put in and hours elapsed in the season so far. Optionally it returns how many waves you should have done to reach your target pace")
                 .addField("^ratio [career wave] [ratio]", "returns the level of the unit you should have based on your wave and your desired ratio.")
-                .addField("^hero [initial level] [final level]", `returns the gold difference for levelling from start to end. "^hero 10 1000" for example`)
-                .addField("^castle [initial level] [final level]",`returns the gold difference for levelling from start to end. "^Castle 10000 100001" for example`)
-                .addField("^ta [initial level] [final level]", `returns the gold difference for levelling from start to end. "^TA 10000 100001" for example`);
+                .addField("^hero [initial level] [final level]", `returns the gold difference for levelling from start to end.\nE.g. ^hero 1 10000`)
+                .addField("^castle [initial level] [final level]",`returns the gold difference for levelling from start to end.\nE.g. ^castle 50000 60000`)
+                .addField("^ta [initial level] [final level]", `returns the gold difference for levelling from start to end.\nE.g. ^TA 10000 20000`)
+                .addField("^upgrade [ta/castle/hero][initial level] [gold, e.g. 12.345B]", `returns the level you will upgrade your unit based on the initial level and the amount of gold. Valid units for gold B/T/Q. This command doesn't work when the initial level of a hero is below level 10k\nE.g. !upgrade TA 10000 200.5B`)
     
                 message.channel.send({ embeds: [embed]});
                 
@@ -45,7 +47,7 @@ export default (client : Client) => {
                 
                 break;
             case 'ratio':
-                content = messageStringList.length == 3 ? (parseInt(messageStringList[1])*parseFloat(messageStringList[2])).toString() : 'Needs two parameter for this command'
+                content = messageStringList.length == 3 ? (Math.floor(parseFloat(messageStringList[1])*parseFloat(messageStringList[2]))).toString() : 'Needs two parameter for this command'
                 message.reply({
                     content: content,
                     allowedMentions: { repliedUser: false }
@@ -53,10 +55,7 @@ export default (client : Client) => {
                 
                 break;
             case 'reset':
-                message.reply({
-                    content: resetCalculator(),
-                    allowedMentions: { repliedUser: false }
-                })
+                message.channel.send({ embeds: [resetCalculator()]});
                 
                 break;
             case 'hero':
@@ -81,6 +80,10 @@ export default (client : Client) => {
                     content: content,
                     allowedMentions: { repliedUser: false }
                 })
+                
+                break;
+            case 'upgrade':
+                message.channel.send({ embeds: [UpgradesCalculator(username, messageStringList)]});
                 
                 break;
             default:

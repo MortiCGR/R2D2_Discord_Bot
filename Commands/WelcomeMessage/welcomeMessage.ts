@@ -6,7 +6,7 @@ export default (client : Client) => {
 
     client.on('guildMemberAdd', (member) => {
         // to safely test commands in test server
-        // if (message.guildId != "963913950041370676")
+        // if (member.guild.id != "963913950041370676")
         // {
         //     return
         // }

@@ -1,3 +1,4 @@
+import { MessageEmbed } from "discord.js";
 import ConvertMsToTime from "../Utils/ConvertMsToTime";
 
 export default () => {
@@ -15,7 +16,12 @@ export default () => {
     let hellResult = (1000 * 60 * 60 * 24 * 7) - (dNowUTC - (dOffset +(1000 * 60 * 60 * 24) * 7*Math.floor(Math.abs(dNowUTC - dOffset)/ (1000 * 60 * 60 * 24)/7)));
 
     let result = `Guild reset in ${ConvertMsToTime(wavesResult)}\n`
-    result += `Hell Mode reset in ${ConvertMsToTime(hellResult)}\n`
-    result += `Colonies reset in ${ConvertMsToTime(coloniesResult)}\n`
-    return result
+    result += `Individual reset in ${ConvertMsToTime(wavesResult - 1000 * 60 * 5)}\n`
+    result += `Hell Mode reset in ${ConvertMsToTime(hellResult - 1000 * 60 * 20)}\n`
+    result += `Colonies reset in ${ConvertMsToTime(coloniesResult - 1000 * 60 * 10)}\n`
+
+    const embed = new MessageEmbed()
+    .setTitle("Reset")
+    .setDescription(result)
+    return embed
 }

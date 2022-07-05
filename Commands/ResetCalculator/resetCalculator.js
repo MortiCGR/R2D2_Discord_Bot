@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const discord_js_1 = require("discord.js");
 const ConvertMsToTime_1 = __importDefault(require("../Utils/ConvertMsToTime"));
 exports.default = () => {
     // offset date in UTC
@@ -16,7 +17,11 @@ exports.default = () => {
     let coloniesResult = (1000 * 60 * 60 * 24 * 10) - (dNowUTC - (dOffset + (1000 * 60 * 60 * 24) * 10 * Math.floor(Math.abs(dNowUTC - dOffset) / (1000 * 60 * 60 * 24) / 10)));
     let hellResult = (1000 * 60 * 60 * 24 * 7) - (dNowUTC - (dOffset + (1000 * 60 * 60 * 24) * 7 * Math.floor(Math.abs(dNowUTC - dOffset) / (1000 * 60 * 60 * 24) / 7)));
     let result = `Guild reset in ${(0, ConvertMsToTime_1.default)(wavesResult)}\n`;
-    result += `Hell Mode reset in ${(0, ConvertMsToTime_1.default)(hellResult)}\n`;
-    result += `Colonies reset in ${(0, ConvertMsToTime_1.default)(coloniesResult)}\n`;
-    return result;
+    result += `Individual reset in ${(0, ConvertMsToTime_1.default)(wavesResult - 1000 * 60 * 5)}\n`;
+    result += `Hell Mode reset in ${(0, ConvertMsToTime_1.default)(hellResult - 1000 * 60 * 20)}\n`;
+    result += `Colonies reset in ${(0, ConvertMsToTime_1.default)(coloniesResult - 1000 * 60 * 10)}\n`;
+    const embed = new discord_js_1.MessageEmbed()
+        .setTitle("Reset")
+        .setDescription(result);
+    return embed;
 };
