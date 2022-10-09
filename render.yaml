@@ -5,7 +5,8 @@ services:
   - type: web # valid values: https://render.com/docs/yaml-spec#type
     name: r2d2-rb-discordbot
     env: node # valid values: https://render.com/docs/yaml-spec#environment
-    dockerfilePath: Dockerfile.render
+    buildCommand: yarn; yarn build
+    startCommand: yarn start
     plan: free # optional; defaults to starter
     numInstances: 1
     envVars:
