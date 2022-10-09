@@ -5,7 +5,7 @@ services:
   - type: web # valid values: https://render.com/docs/yaml-spec#type
     name: r2d2-rb-discordbot
     env: node # valid values: https://render.com/docs/yaml-spec#environment
-    buildCommand: yarn; yarn build
+    buildCommand: yarn
     startCommand: yarn start
     plan: free # optional; defaults to starter
     numInstances: 1
