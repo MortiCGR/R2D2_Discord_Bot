@@ -45,7 +45,7 @@ export default (username : string|undefined, parameters: string[]) => {
     .setDescription(embedDescription)
 
     // offset date in UTC
-    let dt = new Date("2022-09-08T14:55:00Z");
+    let dt = new Date("2022-09-18T14:55:00Z");
     let dOffset = dt.getTime();
     let d = new Date(); 
     // pass current date to UTC
