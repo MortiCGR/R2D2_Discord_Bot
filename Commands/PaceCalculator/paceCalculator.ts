@@ -60,15 +60,19 @@ export default (username : string|undefined, parameters: string[]) => {
 
     
     embed
-    .addField("Estimated pace", `${pace}`, true)
-    .addField("Average WPH", `${Math.floor(pace/120)}`, true)
-    .addField("Time remaining", `${ConvertMsToTime(timeRemaining)}`)
+    .addFields(
+		{ name: "Estimated pace", value: `${pace}`, inline: true },
+		{ name: "Average WPH", value: `${Math.floor(pace/120)}`, inline: true },
+		{ name: "Time remaining", value: `${ConvertMsToTime(timeRemaining)}`, inline: true }
+	)
 
     if (targetPace)
     {
         let expectedWave = Math.floor((result*24) *(targetPace / 120))
-        embed.addField("Your wave should be", `${expectedWave}`, true)
-        embed.addField("Average WPH", `${Math.floor(targetPace/120)}`, true)
+        embed.addFields(
+            { name: "Your wave should be", value: `${expectedWave}`, inline: true },
+            { name: "Average WPH", value: `${Math.floor(targetPace/120)}`, inline: true }
+        )
     }
 
     return embed

@@ -30,14 +30,15 @@ export default (client : Client) => {
                 .setTitle("Help Command")
                 .setColor(0x00AE86)
                 .setDescription("Type ^ or ! as a prefix for a command")
-                .addField("^reset",
-                "returns reset timers for Guild Season, Season Colonies and Hell Mode.")
-                .addField("^pace [seasonal waves] [OPTIONAL target pace]", "returns an estimate for your waves for the rest of that guild season, based on the number that you put in and hours elapsed in the season so far. Optionally it returns how many waves you should have done to reach your target pace")
-                .addField("^ratio [career wave] [ratio]", "returns the level of the unit you should have based on your wave and your desired ratio.")
-                .addField("^hero [initial level] [final level]", `returns the gold difference for levelling from start to end.\nE.g. ^hero 1 10000`)
-                .addField("^castle [initial level] [final level]",`returns the gold difference for levelling from start to end.\nE.g. ^castle 50000 60000`)
-                .addField("^ta [initial level] [final level]", `returns the gold difference for levelling from start to end.\nE.g. ^TA 10000 20000`)
-                .addField("^upgrade [ta/castle/hero][initial level] [gold, e.g. 12.345B]", `returns the level you will upgrade your unit based on the initial level and the amount of gold. Valid units for gold B/T/Q. This command doesn't work when the initial level of a hero is below level 10k\nE.g. !upgrade TA 10000 200.5B`)
+                .addFields(
+                    { name: "^reset", value: "returns reset timers for Guild Season, Season Colonies and Hell Mode."},
+                    { name: "^pace [seasonal waves] [OPTIONAL target pace]", value: "returns an estimate for your waves for the rest of that guild season, based on the number that you put in and hours elapsed in the season so far. Optionally it returns how many waves you should have done to reach your target pace" },
+                    { name: "^ratio [career wave] [ratio]", value: "returns the level of the unit you should have based on your wave and your desired ratio." },
+                    { name: "^hero [initial level] [final level]", value: "returns the gold difference for levelling from start to end.\nE.g. ^hero 1 10000" },
+                    { name: "^castle [initial level] [final level]", value: "returns the gold difference for levelling from start to end.\nE.g. ^castle 50000 60000" },
+                    { name: "^ta [initial level] [final level]", value: "returns the gold difference for levelling from start to end.\nE.g. ^TA 10000 20000" },
+                    { name: "^upgrade [ta/castle/hero][initial level] [gold, e.g. 12.345B]", value: "returns the level you will upgrade your unit based on the initial level and the amount of gold. Valid units for gold B/T/Q. This command doesn't work when the initial level of a hero is below level 10k\nE.g. !upgrade TA 10000 200.5B" }
+                )
     
                 message.channel.send({ embeds: [embed]});
                 
