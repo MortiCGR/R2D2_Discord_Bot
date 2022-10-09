@@ -12,4 +12,6 @@ services:
     envVars:
       - key: NPM_CONFIG_LOGLEVEL # Imported from Heroku app
         value: verbos
+      - key: NODE_VERSION
+        value: 16.14.2
 
