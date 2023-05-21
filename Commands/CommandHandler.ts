@@ -4,6 +4,8 @@ import HeroCostCalculator from "./CostCalculator/HeroCostCalculator"
 import paceCalculator from "./PaceCalculator/paceCalculator"
 import resetCalculator from "./ResetCalculator/resetCalculator"
 import UpgradesCalculator from "./UpgradesCalculator/UpgradesCalculator"
+import RatioCalculator from "./RatioCalculator/RatioCalculator"
+import TabCalculator from "./TabCalculator/TabCalculator"
 
 export default (client : Client) => {
     client.on('messageCreate', (message) => {
@@ -19,10 +21,35 @@ export default (client : Client) => {
         }
 
         const username = message.member?.displayName;
-        const messageStringList = message.content.split(' ');
-        const commandName = messageStringList[0].substring(1).toLowerCase();
+        let messageStringList = message.content.toLowerCase().split(' ');
+        const commandName = messageStringList[0].substring(1);
 
-        let content
+        let isWeirdNumber = false;
+        messageStringList = messageStringList.map(element => {
+            if (element.endsWith("k"))
+            {
+                element = element.replace(/k/g, "000");
+            }
+
+            let elementNumber = parseInt(element);
+            if (elementNumber > 3000000)
+            {
+                isWeirdNumber = true;
+            }
+
+            return element
+        });
+
+        if (isWeirdNumber)
+        {
+            let warningEmbed = new MessageEmbed()
+            .setTitle(`Warning ${message.guild?.emojis.cache.find(emoji => emoji.name === 'pepe_earth_clown')}`)
+            .setColor(0xCC0000)
+            .setDescription(`${username} stop testing me, don't be a ${message.guild?.emojis.cache.find(emoji => emoji.name === 'pepe_clown')}`)
+            message.channel.send({ embeds: [warningEmbed]});
+
+            return;
+        }
 
         switch (commandName) {
             case 'help':
@@ -37,7 +64,9 @@ export default (client : Client) => {
                     { name: "^hero [initial level] [final level]", value: "returns the gold difference for levelling from start to end.\nE.g. ^hero 1 10000" },
                     { name: "^castle [initial level] [final level]", value: "returns the gold difference for levelling from start to end.\nE.g. ^castle 50000 60000" },
                     { name: "^ta [initial level] [final level]", value: "returns the gold difference for levelling from start to end.\nE.g. ^TA 10000 20000" },
-                    { name: "^upgrade [ta/castle/hero][initial level] [gold, e.g. 12.345B]", value: "returns the level you will upgrade your unit based on the initial level and the amount of gold. Valid units for gold B/T/Q. This command doesn't work when the initial level of a hero is below level 10k\nE.g. !upgrade TA 10000 200.5B" }
+                    { name: "^upgrade [ta/castle/hero][initial level] [gold, e.g. 12.345B]", value: "returns the level you will upgrade your unit based on the initial level and the amount of gold. Valid units for gold B/T/Q. This command doesn't work when the initial level of a hero is below level 10k\nE.g. !upgrade TA 10000 200.5B" },
+                    { name: "^tab [avg wave time in seconds] [gpw]", value: "returns the gold per hour that you get with TAB.\nE.g. ^TAB 32.5 550" },
+                    { name: "^guide", value: "Link to Remmy's phys/summon guide." }
                 )
     
                 message.channel.send({ embeds: [embed]});
@@ -48,50 +77,47 @@ export default (client : Client) => {
                 
                 break;
             case 'ratio':
-                content = messageStringList.length == 3 ? (Math.floor(parseFloat(messageStringList[1])*parseFloat(messageStringList[2]))).toString() : 'Needs two parameter for this command'
-                message.reply({
-                    content: content,
-                    allowedMentions: { repliedUser: false }
-                })
+                message.channel.send({ embeds: [RatioCalculator(username, messageStringList)]})
                 
                 break;
             case 'reset':
                 message.channel.send({ embeds: [resetCalculator()]});
                 
                 break;
+            case 'tower':
+            case 'leader':
             case 'hero':
-                content = messageStringList.length == 3 ? HeroCostCalculator(messageStringList[1], messageStringList[2]) : 'Needs two parameters for this command'
-                message.reply({
-                    content: content,
-                    allowedMentions: { repliedUser: false }
-                })
+                message.channel.send({ embeds: [HeroCostCalculator(username, messageStringList)]});
                 
                 break;
             case 'castle':
-                content = messageStringList.length == 3 ? CostCalculator(messageStringList[1], messageStringList[2], 2500) : 'Needs two parameters for this command'
-                message.reply({
-                    content: content,
-                    allowedMentions: { repliedUser: false }
-                })
+                message.channel.send({ embeds: [CostCalculator(username, messageStringList, 2500)]});
                 
                 break;
             case 'ta':
-                content = messageStringList.length == 3 ? CostCalculator(messageStringList[1], messageStringList[2], 1000) : 'Needs two parameters for this command'
-                message.reply({
-                    content: content,
-                    allowedMentions: { repliedUser: false }
-                })
-                
+                message.channel.send({ embeds: [CostCalculator(username, messageStringList, 1000)]});
                 break;
             case 'upgrade':
                 message.channel.send({ embeds: [UpgradesCalculator(username, messageStringList)]});
                 
                 break;
+            case 'tab':
+                message.channel.send({ embeds: [TabCalculator(username, messageStringList)]})
+                
+                break;
+            case 'guide':
+                let guideEmbed = new MessageEmbed() 
+                .setTitle("Link to Remmy's phys/summon guide.")
+                .setColor(0x00AE86)
+                .setDescription("You could find this in the pins in Learning and tips.\n https://discord.com/channels/384022146768175106/625383601269243924/1080172399774924920")
+                message.channel.send({ embeds: [guideEmbed]});
+                break;
             default:
-                message.reply({
-                    content: `"${commandName}" is not a valid command, try ^help to find the list of all the valid commands`,
-                    allowedMentions: { repliedUser: false }
-                })
+                let errorEmbed = new MessageEmbed() 
+                .setTitle("Wrong command.")
+                .setColor(0xCC0000)
+                .setDescription(`"${commandName}" is not a valid command, try ^help to find the list of all the valid commands`)
+                message.channel.send({ embeds: [errorEmbed]});
                 break;
         }
     })
