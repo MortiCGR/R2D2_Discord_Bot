@@ -15,6 +15,7 @@ exports.default = (client) => {
         message += `${member.guild.emojis.cache.find(emoji => emoji.name === 'GlanceReviver')} GlanceReviver - 10k waves per season - 5k minimum career waves\n`;
         message += `${member.guild.emojis.cache.find(emoji => emoji.name === 'RB3')} Redbridge 3 - 8k waves per season - 5k minimum career waves\n`;
         message += `${member.guild.emojis.cache.find(emoji => emoji.name === 'EXT')} -EXT- - 8k waves per season - 5k minimum career waves\n`;
+        message += `${member.guild.emojis.cache.find(emoji => emoji.name === 'SK_SanMarino')} SK_San Marino - 5k waves per season - 5k minimum career waves\n`;
         message += `${member.guild.emojis.cache.find(emoji => emoji.name === 'rb6')} Redbridge 6 - 3K waves per season - No minimum career wave to join\n`;
         message += `${member.guild.emojis.cache.find(emoji => emoji.name === 'rb7')} Redbridge 7 - 1K waves per season - No minimum career wave to join\n`;
         message += `${member.guild.emojis.cache.find(emoji => emoji.name === 'EXT')} -EXT2- - 1 wave per season - No minimum career wave to join\n\n`;

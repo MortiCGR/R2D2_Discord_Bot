@@ -31,12 +31,6 @@ export default (client : Client) => {
                 element = element.replace(/k/g, "000");
             }
 
-            let elementNumber = parseInt(element);
-            if (elementNumber > 3000000)
-            {
-                isWeirdNumber = true;
-            }
-
             return element
         });
 
