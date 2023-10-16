@@ -9,17 +9,9 @@ exports.default = (client) => {
         // {
         //     return
         // }
-        let message = `Hi! <@${member.id}> Welcome to RedBridge! Just a quick summary of our guilds :\n\n`;
-        message += `${member.guild.emojis.cache.find(emoji => emoji.name === 'RB1')} RedBridge - 50k waves per season - 50k minimum career waves\n`;
-        message += `${member.guild.emojis.cache.find(emoji => emoji.name === 'RB2')} RedBridge 2 - 30k waves per season - 10k minimum career waves\n`;
-        message += `${member.guild.emojis.cache.find(emoji => emoji.name === 'GlanceReviver')} GlanceReviver - 10k waves per season - 5k minimum career waves\n`;
-        message += `${member.guild.emojis.cache.find(emoji => emoji.name === 'RB3')} RedBridge 3 - 8k waves per season - 5k minimum career waves\n`;
-        message += `${member.guild.emojis.cache.find(emoji => emoji.name === 'EXT')} -EXT- - 8k waves per season - 5k minimum career waves\n`;
-        message += `${member.guild.emojis.cache.find(emoji => emoji.name === 'SK_SanMarino')} SK_San Marino - 5k waves per season - 5k minimum career waves\n`;
-        message += `${member.guild.emojis.cache.find(emoji => emoji.name === 'rb6')} RedBridge 6 - 3K waves per season - No minimum career wave to join\n`;
-        message += `${member.guild.emojis.cache.find(emoji => emoji.name === 'rb7')} RedBridge 7 - 1.5K waves per season - No minimum career wave to join\n`;
-        message += `${member.guild.emojis.cache.find(emoji => emoji.name === 'EXT')} -EXT2- - 1 wave per season - No minimum career wave to join\n\n`;
-        message += `- We also have a guest channel if you're just stopping by to say hi\n\n`;
+        let message = `Hi! <@${member.id}> Welcome to RedBridge! ${member.guild.emojis.cache.find(emoji => emoji.name === 'RB_COMP_GUILD')} :\n\n`;
+        message += `For a list of our guilds and their seasonal wave requirements, please check the ${member.guild.emojis.cache.find(emoji => emoji.name === 'pushpin')} **pinned message** ${member.guild.emojis.cache.find(emoji => emoji.name === 'pushpin')}\n\n`;
+        message += `We also have a guest channel if you're just stopping by to say hi (please still provide your in-game name and waves)\n\n`;
         message += `If you want to join can you please provide us with :\n`;
         message += `In-Game Name :\n`;
         message += `Waves :\n`;
