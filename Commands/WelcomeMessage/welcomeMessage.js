@@ -10,7 +10,7 @@ exports.default = (client) => {
         //     return
         // }
         let message = `Hi! <@${member.id}> Welcome to RedBridge! ${member.guild.emojis.cache.find(emoji => emoji.name === 'RB_COMP_GUILD')} :\n\n`;
-        message += `For a list of our guilds and their seasonal wave requirements, please check the ${member.guild.emojis.cache.find(emoji => emoji.name === 'pushpin')} **pinned message** ${member.guild.emojis.cache.find(emoji => emoji.name === 'pushpin')}\n\n`;
+        message += `For a list of our guilds and their seasonal wave requirements, please check the :pushpin: **pinned message** :pushpin:\n\n`;
         message += `We also have a guest channel if you're just stopping by to say hi (please still provide your in-game name and waves)\n\n`;
         message += `If you want to join can you please provide us with :\n`;
         message += `In-Game Name :\n`;
